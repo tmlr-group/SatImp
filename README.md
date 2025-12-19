@@ -39,8 +39,9 @@ CUDA_VISIBLE_DEVICES=4 torchrun --nproc_per_node=1 --master_port=27393 forget_gr
 CUDA_VISIBLE_DEVICES=4 torchrun --nproc_per_node=1 --master_port=27393 forget_hardsampling.py --config-name=forget_hardsampling.yaml batch_size=2 gradient_accumulation_steps=8 forget_loss=ga_topk weight_decay=0.0 hyper_param=0.3
 # For forget_imp.py, beta is the p to control allocation
 CUDA_VISIBLE_DEVICES=4 torchrun --nproc_per_node=1 --master_port=27393 forget_imp.py --config-name=forget_imp.yaml batch_size=2 gradient_accumulation_steps=8 forget_loss=ga_topk weight_decay=0.0 beta=0.3
-# For SatImp, hyper_param is beta1, beta is beta2. For SimSat and SimImp, beta controls the weight distribution
-CUDA_VISIBLE_DEVICES=4 torchrun --nproc_per_node=1 --master_port=27393 forget_sat.py --config-name=forget_sat.yaml batch_size=2 gradient_accumulation_steps=8 forget_loss=satimp weight_decay=0.0 beta=0.3 hyper_param=0.3
+# For SatImp, hyper_param is beta1, beta is beta2. For SimSat and SimImp, beta controls the weight distribution.
+# The recommended hyper-parameters of SatImp method is beta1=5.0, beta2=0.1
+CUDA_VISIBLE_DEVICES=4 torchrun --nproc_per_node=1 --master_port=27393 forget_sat.py --config-name=forget_sat.yaml batch_size=2 gradient_accumulation_steps=8 forget_loss=satimp weight_decay=0.0 beta=0.1 hyper_param=5.0
 
 # For WMDP and MUSE, the unlearning is similiar
 CUDA_VISIBLE_DEVICES=4 torchrun --nproc_per_node=1 --master_port=27393 muse_base.py --config-name=muse_base.yaml batch_size=2 gradient_accumulation_steps=8 forget_loss=simnpo split=news weight_decay=0.0 beta=3.0 npo_coeff=0.2 
